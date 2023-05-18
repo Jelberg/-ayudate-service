@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "types": ["node"],
+    "lib": ["es2020", "esnext.asynciterable"],
+    "typeRoots": ["./node_modules/@types", "package/types"],
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "pretty": true,
+    "sourceMap": true,
+    "outDir": "./build",
+    "allowJs": true,
+    "noEmit": false,
+    "esModuleInterop": true
+  },
+  "include": ["package/**/*"],
+  "exclude": ["node_modules", "__tests__"]
+}
