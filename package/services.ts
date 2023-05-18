@@ -36,7 +36,9 @@ export async function findEmail(email: String) {
 //FALTA DEVOLVER EL PROGRESO CUANDO LOGRA INICIAR SESION
 export async function login(user: User, res: e.Request) {
   try {
-    const u = await UserSchema.findOne({ email: user.email });
+    const u = await UserSchema.findOne({
+      email: user.email,
+    });
 
     if (!u) {
       return res.status(200).send({ email: false, message: "User not found" });
@@ -46,7 +48,13 @@ export async function login(user: User, res: e.Request) {
       return res.status(200).send({ email: false, message: "Password error" });
     }
 
-    return res.status(200).send({ email: user.email });
+    const progress = await ProgressSchema.findOne({ email: user.email });
+
+    return res.status(200).send({
+      email: user.email,
+      message: "Success Login! ♣",
+      progress: progress || { email: false, message: "Progress not found" },
+    });
   } catch (error) {
     console.log(error);
   }
@@ -95,7 +103,7 @@ export async function updatedProgress(progress: Progress, res: e.Request) {
       console.error("User not exist");
       return await res
         .status(200)
-        .send({ email: null, message: "User not exist" });
+        .send({ email: false, message: "User not exist" });
     }
   } catch (error) {
     console.log(error);
@@ -107,7 +115,7 @@ export async function getProgressByEmail(email: String, res: e.Request) {
     const progress = await ProgressSchema.findOne({ email: email });
     return progress
       ? res.status(200).send(progress)
-      : res.status(200).send({ email: null, message: "Progress not exist" });
+      : res.status(200).send({ email: false, message: "Progress not exist" });
   } catch (error) {
     console.log(error);
   }
