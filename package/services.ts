@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
 
 export async function signup(user: User, res: e.Request): Promise<User> {
   try {
+    console.log("USER", user);
     const emailIsTaken = await findEmail(user.email);
 
     if (!emailIsTaken) {
