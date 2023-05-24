@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/signup", async (req: express.Request, res: express.Request) => {
-  console.log(res.body);
+  console.log(JSON.stringify(res.body));
   const result = await signup(req.body, res);
   return result;
 });
