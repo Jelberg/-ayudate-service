@@ -1,7 +1,13 @@
 import express from "express";
 import expressLoader from "./express";
 import mongoose from "./mongoose";
-import { login, signup, creatorProgress, getProgressByEmail } from "./services";
+import {
+  login,
+  signup,
+  creatorProgress,
+  getProgressByEmail,
+  getDataUserByEmail,
+} from "./services";
 
 mongoose();
 const app = express();
@@ -26,6 +32,14 @@ app.post(
   "/creatorProgress",
   async (req: express.Request, res: express.Request) => {
     const result = await creatorProgress(req.body, res);
+    return result;
+  }
+);
+
+app.get(
+  "/getDataUser/:email",
+  async (req: express.Request, res: express.Request) => {
+    const result = await getDataUserByEmail(req.params.email, res);
     return result;
   }
 );
