@@ -55,8 +55,8 @@ export async function login(user: User, res: e.Request) {
     console.log(user);
     return await res.status(200).send({
       email: user.email,
-      user: user.user,
-      school: user.school,
+      user: u.user,
+      school: u.school,
       message: "Success Login! ♣",
       progress: progress || { email: false, message: "Progress not found" },
     });
