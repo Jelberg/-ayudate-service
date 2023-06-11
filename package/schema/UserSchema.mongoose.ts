@@ -11,6 +11,12 @@ const UserSchema = new Schema(
       type: String,
       required: "Password is required!",
     },
+    user: {
+      type: String,
+    },
+    school: {
+      type: String,
+    },
   },
   {
     timestamps: true,
