@@ -64,12 +64,19 @@ export async function login(user: User, res: e.Request) {
 }
 
 export async function getDataUserByEmail(email: string, res: e.Request) {
-  const progress = await ProgressSchema.findOne({ email: email });
-  return await res.status(200).send({
-    email: email,
-    message: "Success Login! ♣",
-    progress: progress || { email: false, message: "Progress not found" },
-  });
+  try {
+    const progress = await ProgressSchema.findOne({ email: email });
+    const u = await UserSchema.findOne({ email: email });
+    return await res.status(200).send({
+      email: email,
+      user: u.user,
+      school: u.school,
+      message: "Success Login! ♣",
+      progress: progress || { email: false, message: "Progress not found" },
+    });
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function creatorProgress(progress: Progress, res: e.Request) {
