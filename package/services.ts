@@ -51,6 +51,8 @@ export async function login(user: User, res: e.Request) {
 
     const progress = await ProgressSchema.findOne({ email: user.email });
 
+    console.log("login");
+    console.log(user);
     return await res.status(200).send({
       email: user.email,
       user: user.user,
