@@ -34,7 +34,6 @@ export async function findEmail(email: String) {
   }
 }
 
-//FALTA DEVOLVER EL PROGRESO CUANDO LOGRA INICIAR SESION
 export async function login(user: User, res: e.Request) {
   try {
     const u = await UserSchema.findOne({
@@ -52,7 +51,7 @@ export async function login(user: User, res: e.Request) {
     const progress = await ProgressSchema.findOne({ email: user.email });
 
     console.log("login");
-    console.log(user);
+    console.log(u);
     return await res.status(200).send({
       email: user.email,
       user: u.user,
@@ -139,5 +138,22 @@ export async function getProgressByEmail(email: String, res: e.Request) {
       : res.status(200).send({ email: false, message: "Progress not exist" });
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function updatePassword(user: User, res: e.Request) {
+  try {
+    console.log("updatePassword");
+    console.log(user);
+    let newPassword = bcrypt.hashSync(user.password, 7);
+    var filter = { email: user.email };
+    var update = {
+      password: newPassword,
+    };
+    return await res
+      .status(200)
+      .send(await UserSchema.findOneAndUpdate(filter, update));
+  } catch (error) {
+    throw error;
   }
 }

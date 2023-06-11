@@ -7,6 +7,7 @@ import {
   creatorProgress,
   getProgressByEmail,
   getDataUserByEmail,
+  updatePassword,
 } from "./services";
 
 mongoose();
@@ -32,6 +33,14 @@ app.post(
   "/creatorProgress",
   async (req: express.Request, res: express.Request) => {
     const result = await creatorProgress(req.body, res);
+    return result;
+  }
+);
+
+app.post(
+  "/updatePassword",
+  async (req: express.Request, res: express.Request) => {
+    const result = await updatePassword(req.body, res);
     return result;
   }
 );
