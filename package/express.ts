@@ -13,6 +13,7 @@ export default async ({ app }) => {
     })
   );
   app.listen(env.port, () => {
+    console.warn("INFO");
     console.log(`Listening on port ${env.port}`);
     console.log(`Data base url ${env.databaseURL}`);
   });
