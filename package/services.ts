@@ -11,7 +11,6 @@ export async function signup(user: User, res: e.Request): Promise<User> {
     const emailIsTaken = await findEmail(user.email);
 
     if (!emailIsTaken) {
-      console.log(user.password);
       user.password = bcrypt.hashSync(user.password, 7);
       return await res.status(200).send(await UserSchema.create(user));
     } else {
@@ -36,6 +35,7 @@ export async function findEmail(email: String) {
 
 export async function login(user: User, res: e.Request) {
   try {
+    console.log(user);
     const u = await UserSchema.findOne({
       email: user.email,
     });
