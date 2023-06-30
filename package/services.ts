@@ -35,10 +35,11 @@ export async function findEmail(email: String) {
 
 export async function login(user: User, res: e.Request) {
   try {
-    console.log(user);
     const u = await UserSchema.findOne({
       email: user.email,
     });
+
+    console.log("THIS IS FINDED ", u);
 
     if (!u) {
       return res.status(200).send({ email: false, message: "User not found" });
