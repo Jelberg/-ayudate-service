@@ -7,7 +7,6 @@ import bcrypt from "bcrypt";
 
 export async function signup(user: User, res: e.Request): Promise<User> {
   try {
-    console.log("USER", user);
     const emailIsTaken = await findEmail(user.email);
 
     if (!emailIsTaken) {
@@ -39,8 +38,6 @@ export async function login(user: User, res: e.Request) {
       email: user.email,
     });
 
-    console.log("THIS IS FINDED ", u);
-
     if (!u) {
       return res.status(200).send({ email: false, message: "User not found" });
     }
@@ -51,8 +48,6 @@ export async function login(user: User, res: e.Request) {
 
     const progress = await ProgressSchema.findOne({ email: user.email });
 
-    console.log("login");
-    console.log(u);
     return await res.status(200).send({
       email: user.email,
       user: u.user,
@@ -144,8 +139,6 @@ export async function getProgressByEmail(email: String, res: e.Request) {
 
 export async function updatePassword(user: User, res: e.Request) {
   try {
-    console.log("updatePassword");
-    console.log(user);
     let newPassword = bcrypt.hashSync(user.password, 7);
     var filter = { email: user.email };
     var update = {
